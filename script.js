@@ -20,7 +20,7 @@ let gifts = [
     { "name": "Máquina de secar roupa", "bought": false },
     { "name": "Climatizador/Ventilador", "bought": false },
     { "name": "Colchão", "bought": false },
-    { "name": "Criado-mudo", "bought": false },
+    { "name": "Mesa De Cabeceira", "bought": false },
     { "name": "Cômoda", "bought": false },
     { "name": "Mesa de jantar", "bought": false },
     { "name": "Cadeiras", "bought": false },
