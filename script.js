@@ -1,42 +1,28 @@
 let selectedItem = "";
+let gifts = [];
 
-let gifts = [
-    async function saveGift(giftName) {
-  const response = await fetch('https://script.google.com/macros/s/1y0cWP_AZg_9p7AomO0gucAdl4GWLYq0GqN08qhdLrUI/exec', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: giftName })
-  });
+// URL do seu script do Google Apps
+const scriptUrl = 'https://script.google.com/macros/s/AKfycbyB1llKwvWLNpf9JQKZsUW4kFSF5_LtSaXxj3jNxsjN12f4D8s-AOI010LMDPZ3WgWlBQ/exec';
 
-  const data = await response.json();
-  if (data.status === 'success') {
-    alert("Presente confirmado!");
-    loadGifts();
-  } else {
-    alert("Erro ao confirmar o presente.");
-  }
-}
+// Função para carregar os dados da planilha via Google Apps Script
+async function loadGiftsFromSheet() {
+    try {
+        const response = await fetch(scriptUrl);
+        const data = await response.json();
 
-async function loadGifts() {
-  const response = await fetch('https://script.google.com/macros/s/1y0cWP_AZg_9p7AomO0gucAdl4GWLYq0GqN08qhdLrUI/exec');
-  const gifts = await response.json();
-
-  // Atualize a lista de presentes com os dados recebidos
-  // e marque os itens conforme seu status 'bought'
-}
-
-];
-
-function saveGifts() {
-    localStorage.setItem('gifts', JSON.stringify(gifts));
-}
-
-function loadGifts() {
-    const savedGifts = localStorage.getItem('gifts');
-    if (savedGifts) {
-        gifts = JSON.parse(savedGifts);
+        if (data && data.gifts) {
+            gifts = data.gifts; // Supondo que o seu script retorne os dados no formato esperado
+            loadGifts(); // Carregar os presentes após carregar da planilha
+        } else {
+            console.error("Dados não encontrados na resposta.");
+        }
+    } catch (error) {
+        console.error("Erro ao carregar os dados da planilha:", error);
     }
+}
 
+// Carregar os itens de presente no HTML
+function loadGifts() {
     const giftList = document.getElementById("gift-list");
     giftList.innerHTML = "";
 
@@ -107,4 +93,5 @@ async function sendGift() {
     }
 }
 
-loadGifts();
+// Chama a função para carregar os presentes ao iniciar
+loadGiftsFromSheet();
