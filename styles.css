@@ -155,10 +155,17 @@ button:not(:disabled):hover {
 }
 
 .error-message {
-    color: #dc3545; /* Cor vermelha para o erro */
-    font-size: 0.875rem; /* Tamanho menor para a mensagem */
-    margin-top: 5px; /* Espaçamento acima da mensagem */
-    display: none; /* Inicialmente oculto */
+    color: #dc3545; /* Vermelho para erros */
+    font-size: 0.875rem;
+    margin-top: 5px;
+    display: none;
+}
+
+.success-message {
+    color: #28a745; /* Verde para sucesso */
+    font-size: 0.875rem;
+    margin-top: 5px;
+    display: none;
 }
 
 .modal-buttons {

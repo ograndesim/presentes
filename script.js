@@ -62,9 +62,17 @@ async function sendGift() {
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const emailError = document.getElementById("email-error");
+    const successMessage = document.getElementById("success-message");
+    const errorMessage = document.getElementById("error-message");
+
+    // Limpar mensagens anteriores
+    emailError.style.display = "none";
+    successMessage.style.display = "none";
+    errorMessage.style.display = "none";
 
     if (!name || !email) {
-        alert("Preencha todos os campos!");
+        errorMessage.textContent = "Preencha todos os campos!";
+        errorMessage.style.display = "block";
         return;
     }
 
@@ -72,8 +80,6 @@ async function sendGift() {
         emailError.textContent = "Por favor, insira um e-mail válido. Exemplo: usuario@example.com";
         emailError.style.display = "block";
         return;
-    } else {
-        emailError.style.display = "none";
     }
 
     try {
@@ -89,15 +95,19 @@ async function sendGift() {
         const result = await response.json();
 
         if (result.status === 'success') {
-            alert("Presente confirmado! Obrigado.");
-            closeModal();
-            loadGiftsFromSheet(); // Recarrega os presentes da planilha
+            successMessage.textContent = "Presente confirmado! Obrigado.";
+            successMessage.style.display = "block";
+            setTimeout(() => {
+                closeModal();
+                loadGiftsFromSheet(); // Recarrega os presentes da planilha
+            }, 2000); // Fecha o modal após 2 segundos
         } else {
             throw new Error("Erro ao confirmar o presente.");
         }
     } catch (error) {
         console.error("Erro ao enviar o presente:", error);
-        alert("Erro ao confirmar o presente. Tente novamente.");
+        errorMessage.textContent = "Erro ao confirmar o presente. Tente novamente.";
+        errorMessage.style.display = "block";
     }
 }
 
