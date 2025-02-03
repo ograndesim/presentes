@@ -1,5 +1,6 @@
 let selectedItem = "";
 
+// Lista de presentes
 let gifts = [
     { "name": "Forno elétrico", "bought": false, "category": "ELETRODOMÉSTICOS" },
     { "name": "Coifa", "bought": false, "category": "ELETRODOMÉSTICOS" },
@@ -163,4 +164,5 @@ async function sendGift() {
     }
 }
 
+// Carregar a lista ao inicializar a página
 loadGifts();
