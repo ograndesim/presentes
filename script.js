@@ -2,7 +2,7 @@ let selectedItem = "";
 let gifts = [];
 
 // URL do seu script do Google Apps Script
-const scriptUrl = 'https://script.google.com/macros/s/AKfycbw8nMqJVoED2xB6ES1xujrint_LtnPHna7TLPA-wydF6KjsnPv-Edugy8QAL4vHOJOpDQ/exec'; // Substitua pelo seu URL
+const scriptUrl = 'https://script.google.com/macros/s/AKfycbxs-B1NF6GNuR94VkJvpsjcA3484QzRAWxC6xW89zHsiXbagRyjsICnUn6rkW5tlAcV/exec'; // Substitua pelo seu URL
 
 // Função para carregar os dados da planilha via Google Apps Script
 async function loadGiftsFromSheet() {
