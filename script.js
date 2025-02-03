@@ -1,7 +1,7 @@
 let selectedItem = "";
 
 // URL do seu script do Google Apps Script (Substitua pela sua URL)
-const scriptUrl = 'https://script.google.com/macros/s/AKfycbxs-B1NF6GNuR94VkJvpsjcA3484QzRAWxC6xW89zHsiXbagRyjsICnUn6rkW5tlAcV/exec';
+const scriptUrl = 'https://script.google.com/macros/s/AKfycbxs-B1NF6GNuR94VkJvpsjcA3484QzRAWxC6xW89zHsiXbagRyjsICnUn6rkW5tlAcV/exec'; // **Substitua pela sua URL**
 
 // Função para carregar os presentes
 async function loadGifts() {
@@ -61,9 +61,9 @@ function validateEmail(email) {
     return regex.test(email);
 }
 
-// Enviar o presente
-async function confirmGift() {
-    console.log("Função confirmGift() chamada!"); // Log para Depuração
+// Enviar o presente (função renomeada para confirmGift)
+async function confirmGift() { 
+    console.log("Função confirmGift() chamada!");
 
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
@@ -76,17 +76,17 @@ async function confirmGift() {
     successMessage.style.display = "none";
     errorMessage.style.display = "none";
 
-    // **Validação dos Campos**
+    // Validação dos Campos
     if (!name || !email) {
         errorMessage.textContent = "Preencha todos os campos!";
         errorMessage.style.display = "block";
-        return; // Sai da função se os campos não estiverem preenchidos
+        return; 
     }
 
     if (!validateEmail(email)) {
         emailError.textContent = "Por favor, insira um e-mail válido. Exemplo: usuario@example.com";
         emailError.style.display = "block";
-        return; // Sai da função se o e-mail for inválido
+        return;
     }
 
     try {
@@ -99,11 +99,11 @@ async function confirmGift() {
             body: JSON.stringify({ name: selectedItem, nome: name, email: email }),
         });
 
-        console.log("Resposta do servidor:", response); // Log para Depuração
+        console.log("Resposta do servidor:", response);
 
         const result = await response.json();
 
-        console.log("Resultado:", result); // Log para Depuração
+        console.log("Resultado:", result);
 
         if (result.status === 'success') {
             successMessage.textContent = "Presente confirmado! Obrigado.";
