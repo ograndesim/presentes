@@ -1,4 +1,3 @@
-<script>
     let selectedItem = "";
 
     let gifts = [
@@ -165,4 +164,4 @@
     }
 
     loadGifts();
-</script>
+
