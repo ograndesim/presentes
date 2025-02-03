@@ -1,77 +1,194 @@
-body {
-    font-family: Arial, sans-serif;
-    background-image: url('background.jpg'); /* Coloque o caminho da imagem de fundo aqui */
-    background-size: cover;
+/* Reset básico */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('https://images.unsplash.com/photo-1512418490979-92798cec1380?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    color: #333;
 }
 
 header {
-    background-color: rgba(0, 0, 0, 0.5); /* Transparente para ver a imagem de fundo */
-    color: white;
     text-align: center;
-    padding: 20px;
+    margin-bottom: 20px;
 }
 
-main {
+header h1 {
+    font-size: 2.5rem;
+    color: #5a3a22;
+}
+
+header h2 {
+    font-size: 1.5rem;
+    color: #8b7355;
+}
+
+.gift-section {
+    margin-top: 20px;
+}
+
+.gift-section h3 {
+    font-size: 1.5rem;
+    color: #5a3a22;
+    margin-bottom: 15px;
+}
+
+.gift-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.gift-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    width: 200px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gift-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.gift-item button {
+    margin-top: 10px;
+    width: 100%;
+}
+
+button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+button:not(:disabled) {
+    background: #5a3a22;
+    color: white;
+}
+
+button:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+    background: #8b7355;
+}
+
+#modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
     padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    color: #333;
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #5a3a22;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #555;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.error-message {
+    color: #dc3545; /* Cor vermelha para o erro */
+    font-size: 0.875rem; /* Tamanho menor para a mensagem */
+    margin-top: 5px; /* Espaçamento acima da mensagem */
+    display: none; /* Inicialmente oculto */
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.modal-buttons button {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.modal-buttons button:last-child {
+    background: #dc3545;
+}
+
+.modal-buttons button:last-child:hover {
+    background: #c82333;
 }
 
 footer {
-    background-color: rgba(0, 0, 0, 0.5); /* Transparente para ver a imagem de fundo */
-    color: white;
-    padding: 20px;
+    margin-top: 30px;
     text-align: center;
-}
-
-footer p {
-    margin: 5px 0;
-}
-
-#info-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    width: 300px;
-    margin: 20px auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#info-form input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-#info-form button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    border: none;
-    width: 100%;
-    cursor: pointer;
-}
-
-#info-form button:hover {
-    background-color: #45a049;
-}
-
-.category h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.present {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.present span {
-    font-size: 18px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    color: #000000;
+    font-size: 1.1rem;
+    font-style: Light;
 }
