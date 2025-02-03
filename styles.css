@@ -83,14 +83,13 @@ header h2 {
     width: 100%;
 }
 
-/* Botões com transição de cor */
 button {
     padding: 8px 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background 0.3s ease, transform 0.2s ease;
+    transition: background 0.3s ease;
 }
 
 button:not(:disabled) {
@@ -105,7 +104,6 @@ button:disabled {
 
 button:not(:disabled):hover {
     background: #8b7355;
-    transform: scale(1.05);
 }
 
 #modal {
@@ -128,7 +126,6 @@ button:not(:disabled):hover {
     max-width: 400px;
     text-align: center;
     color: #333;
-    transition: transform 0.3s ease;
 }
 
 .modal-content h2 {
@@ -194,56 +191,4 @@ footer {
     color: #000000;
     font-size: 1.1rem;
     font-style: Light;
-}
-
-/* Responsividade para telas pequenas */
-@media (max-width: 768px) {
-    .gift-list {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .gift-item {
-        width: 90%;
-        max-width: 300px;
-    }
-
-    .modal-content {
-        width: 90%;
-        max-width: 350px;
-    }
-}
-
-/* Responsividade para telas muito pequenas (ex. celulares) */
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 2rem;
-    }
-
-    header h2 {
-        font-size: 1.2rem;
-    }
-
-    .gift-section h3 {
-        font-size: 1.2rem;
-    }
-
-    .gift-item {
-        width: 90%;
-        padding: 12px;
-    }
-
-    .modal-content {
-        width: 90%;
-        max-width: 300px;
-    }
-
-    .modal-buttons button {
-        font-size: 0.9rem;
-        padding: 8px;
-    }
-
-    footer {
-        font-size: 1rem;
-    }
 }
