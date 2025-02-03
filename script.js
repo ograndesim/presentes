@@ -20,6 +20,28 @@ async function loadGiftsFromSheet() {
         console.error("Erro ao carregar os dados da planilha:", error);
     }
 }
+try {
+        await emailjs.send('service_0m6kpou', 'template_kup4ovf', {
+            name: name,
+            email: email,
+            item: selectedItem
+        });
+
+        alert("Presente confirmado! Obrigado.");
+        closeModal();
+
+        const gift = gifts.find(g => g.name === selectedItem);
+        if (gift) gift.bought = true;
+
+        saveGifts(); // Salva o estado atualizado no localStorage
+        loadGifts(); // Recarrega a lista de presentes
+    } catch (error) {
+        console.error("Erro ao enviar o e-mail:", error);
+        alert("Erro ao confirmar o presente. Tente novamente.");
+    }
+}
+
+loadGifts();
 
 // Carregar os itens de presente no HTML
 function loadGifts() {
@@ -112,26 +134,4 @@ async function sendGift() {
 }
 
 // Carregar os presentes ao iniciar
-loadGiftsFromSheet();
-try {
-        await emailjs.send('service_0m6kpou', 'template_kup4ovf', {
-            name: name,
-            email: email,
-            item: selectedItem
-        });
 
-        alert("Presente confirmado! Obrigado.");
-        closeModal();
-
-        const gift = gifts.find(g => g.name === selectedItem);
-        if (gift) gift.bought = true;
-
-        saveGifts(); // Salva o estado atualizado no localStorage
-        loadGifts(); // Recarrega a lista de presentes
-    } catch (error) {
-        console.error("Erro ao enviar o e-mail:", error);
-        alert("Erro ao confirmar o presente. Tente novamente.");
-    }
-}
-
-loadGifts();
