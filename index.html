@@ -1,44 +1,56 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Presentes de Casamento</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Inclusão do EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <title>Lista de Presentes - Jéssica & Caio</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        emailjs.init('oJ4KCIZkv1dOQ-xO8'); // Sua API Key
+    </script>
 </head>
 <body>
-    <header>
-        <h1>Lista de Presentes de Casamento</h1>
-    </header>
+    <div class="container">
+        <header>
+            <h1>Lista de Presentes</h1>
+            <h2>Ajude-nos a não começar a vida a dois com uma única panela e muita esperança! 😅</h2>
+        </header>
 
-    <main>
-        <div id="present-list"></div>
-    </main>
+        <section class="gift-section">
+            <h3></h3>
+            <div id="gift-list" class="gift-list">
+                <!-- Itens serão preenchidos pelo JavaScript -->
+            </div>
+        </section>
 
-    <footer>
-        <div id="footer-content">
-            <p>&copy; 2025 Todos os direitos reservados.</p>
-            <p><strong>Entre em contato:</strong> meuemail@dominio.com</p>
-        </div>
-        <div id="footer-message">
-            <p>Escolha um presente da nossa lista, preencha seus dados e nos ajude a realizar este momento especial.</p>
-        </div>
-    </footer>
-
-    <!-- Formulário para coleta de informações -->
-    <div id="info-form" style="display:none;">
-        <h3>Detalhes do presente escolhido</h3>
-        <p>Preencha suas informações para que possamos confirmar sua escolha.</p>
-        <form id="giftForm">
-            <input type="text" id="name" placeholder="Seu nome" required>
-            <input type="email" id="email" placeholder="Seu e-mail" required>
-            <input type="tel" id="phone" placeholder="Seu telefone" required>
-            <button type="submit">Enviar</button>
-        </form>
+        <!-- Rodapé com a mensagem -->
+        <footer>
+            <p>O maior presente é a sua presença... Mas se quiser complementar com algo da lista, não vamos recusar</p>
+        </footer>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Modal para confirmar o presente -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmar Presente</h2>
+            <p id="selected-item"></p>
+            <div class="input-group">
+                <label for="name">Seu Nome:</label>
+                <input type="text" id="name" placeholder="Seu Nome" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Seu E-mail:</label>
+                <input type="email" id="email" placeholder="Seu E-mail" required>
+                <span id="email-error" class="error-message"></span> <!-- Mensagem de erro aqui -->
+            </div>
+            <div class="modal-buttons">
+                <button onclick="sendGift()">Confirmar</button>
+                <button onclick="closeModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
 </body>
 </html>
