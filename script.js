@@ -20,28 +20,6 @@ async function loadGiftsFromSheet() {
         console.error("Erro ao carregar os dados da planilha:", error);
     }
 }
-try {
-        await emailjs.send('service_0m6kpou', 'template_kup4ovf', {
-            name: name,
-            email: email,
-            item: selectedItem
-        });
-
-        alert("Presente confirmado! Obrigado.");
-        closeModal();
-
-        const gift = gifts.find(g => g.name === selectedItem);
-        if (gift) gift.bought = true;
-
-        saveGifts(); // Salva o estado atualizado no localStorage
-        loadGifts(); // Recarrega a lista de presentes
-    } catch (error) {
-        console.error("Erro ao enviar o e-mail:", error);
-        alert("Erro ao confirmar o presente. Tente novamente.");
-    }
-}
-
-loadGifts();
 
 // Carregar os itens de presente no HTML
 function loadGifts() {
@@ -105,13 +83,12 @@ async function sendGift() {
     }
 
     try {
-        // Envia o presente para o Google Apps Script
         const response = await fetch(scriptUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name: selectedItem }),
+            body: JSON.stringify({ name: selectedItem, email, person: name }),
         });
 
         const result = await response.json();
@@ -119,6 +96,11 @@ async function sendGift() {
         if (result.status === 'success') {
             successMessage.textContent = "Presente confirmado! Obrigado.";
             successMessage.style.display = "block";
+
+            // Atualiza o status do presente localmente
+            const gift = gifts.find(g => g.name === selectedItem);
+            if (gift) gift.bought = true;
+
             setTimeout(() => {
                 closeModal();
                 loadGiftsFromSheet(); // Recarrega os presentes da planilha
@@ -133,5 +115,5 @@ async function sendGift() {
     }
 }
 
-// Carregar os presentes ao iniciar
-
+// Carrega os presentes ao iniciar
+loadGiftsFromSheet();
