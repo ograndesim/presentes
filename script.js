@@ -1,6 +1,6 @@
 let selectedItem = "";
 
-// URL do seu script do Google Apps Script (Atualize com a URL correta após a nova implantação)
+// URL do seu script do Google Apps Script
 const scriptUrl = 'https://script.google.com/macros/s/AKfycbw_M-Hd3P_Ikg5hz6U5fO-7LIP-P7xVOO4Jd15s55iC9H4Y-qJ6Uu5k2qU2lS1dJ2gY0w/exec';
 
 // Função para carregar os presentes
