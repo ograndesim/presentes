@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-image: url('https://images.unsplash.com/photo-1512418490979-92798cec1380?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Otimize esta imagem */
+    background-image: url('https://images.unsplash.com/photo-1512418490979-92798cec1380?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -18,19 +18,6 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 20px;
-    position: relative; /* Para o overlay */
-}
-
-/* Overlay para melhorar o contraste */
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: -1;
 }
 
 .container {
@@ -75,106 +62,4 @@ header h2 {
     justify-content: center;
 }
 
-.gift-item {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    width: 200px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.gift-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.gift-item button {
-    margin-top: 10px;
-    width: 100%;
-}
-
-button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s ease;
-}
-
-button:not(:disabled) {
-    background: #5a3a22;
-    color: white;
-}
-
-button:disabled {
-    background: #6c757d;
-    cursor: not-allowed;
-}
-
-button:not(:disabled):hover {
-    background: #8b7355;
-}
-
-/* Estilos para o estado :focus */
-button:focus,
-input:focus {
-    outline: 2px solid #5a3a22;
-    outline-offset: 2px;
-}
-
-#modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    color: #333;
-}
-
-.modal-content h2 {
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-    color: #5a3a22;
-}
-
-.input-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 1rem;
-    color: #555;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    box-sizing: border-box; /* Importante para o cálculo correto da largura */
-}
-
-.error-message {
-    color: #dc3545;
-    font-size: 0
+.gift-item
