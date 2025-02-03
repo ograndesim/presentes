@@ -1,7 +1,7 @@
 let selectedItem = "";
 
-// URL do seu script do Google Apps Script
-const scriptUrl = 'https://script.google.com/macros/s/AKfycbxs-B1NF6GNuR94VkJvpsjcA3484QzRAWxC6xW89zHsiXbagRyjsICnUn6rkW5tlAcV/exec'; // **Substitua pela sua URL**
+// URL do seu script do Google Apps Script (Substitua pela sua URL)
+const scriptUrl = 'https://script.google.com/macros/s/AKfycbxs-B1NF6GNuR94VkJvpsjcA3484QzRAWxC6xW89zHsiXbagRyjsICnUn6rkW5tlAcV/exec';
 
 // Função para carregar os presentes
 async function loadGifts() {
@@ -47,6 +47,12 @@ function selectGift(item) {
 // Fechar o modal
 function closeModal() {
     document.getElementById("modal").style.display = "none";
+    // Limpa os campos do modal quando ele é fechado
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("email-error").style.display = "none";
+    document.getElementById("success-message").style.display = "none";
+    document.getElementById("error-message").style.display = "none";
 }
 
 // Validar e-mail (melhorável, mas funcional)
@@ -57,7 +63,7 @@ function validateEmail(email) {
 
 // Enviar o presente
 async function confirmGift() {
-    console.log("Função confirmGift() chamada!"); // **Log para Depuração**
+    console.log("Função confirmGift() chamada!"); // Log para Depuração
 
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
@@ -70,16 +76,17 @@ async function confirmGift() {
     successMessage.style.display = "none";
     errorMessage.style.display = "none";
 
+    // **Validação dos Campos**
     if (!name || !email) {
         errorMessage.textContent = "Preencha todos os campos!";
         errorMessage.style.display = "block";
-        return;
+        return; // Sai da função se os campos não estiverem preenchidos
     }
 
     if (!validateEmail(email)) {
         emailError.textContent = "Por favor, insira um e-mail válido. Exemplo: usuario@example.com";
         emailError.style.display = "block";
-        return;
+        return; // Sai da função se o e-mail for inválido
     }
 
     try {
@@ -92,11 +99,11 @@ async function confirmGift() {
             body: JSON.stringify({ name: selectedItem, nome: name, email: email }),
         });
 
-        console.log("Resposta do servidor:", response); // **Log para Depuração**
+        console.log("Resposta do servidor:", response); // Log para Depuração
 
         const result = await response.json();
 
-        console.log("Resultado:", result); // **Log para Depuração**
+        console.log("Resultado:", result); // Log para Depuração
 
         if (result.status === 'success') {
             successMessage.textContent = "Presente confirmado! Obrigado.";
