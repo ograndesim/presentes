@@ -1,8 +1,8 @@
 let selectedItem = "";
 let gifts = [];
 
-// URL do seu script do Google Apps
-const scriptUrl = 'https://script.google.com/macros/s/AKfycbw8nMqJVoED2xB6ES1xujrint_LtnPHna7TLPA-wydF6KjsnPv-Edugy8QAL4vHOJOpDQ/exec'; // Seu código de implantação
+// URL do seu script do Google Apps Script
+const scriptUrl = 'https://script.google.com/macros/s/AKfycbw8nMqJVoED2xB6ES1xujrint_LtnPHna7TLPA-wydF6KjsnPv-Edugy8QAL4vHOJOpDQ/exec'; // Substitua pelo seu URL
 
 // Função para carregar os dados da planilha via Google Apps Script
 async function loadGiftsFromSheet() {
@@ -10,11 +10,11 @@ async function loadGiftsFromSheet() {
         const response = await fetch(scriptUrl);
         const data = await response.json();
 
-        if (data && data.gifts) {
-            gifts = data.gifts;
+        if (data && Array.isArray(data)) {
+            gifts = data;
             loadGifts();
         } else {
-            console.error("Dados não encontrados na resposta.");
+            console.error("Dados não encontrados ou formato inválido.");
         }
     } catch (error) {
         console.error("Erro ao carregar os dados da planilha:", error);
@@ -30,7 +30,8 @@ function loadGifts() {
         const giftItem = document.createElement("div");
         giftItem.classList.add("gift-item");
         giftItem.innerHTML = `
-            <p>${gift.nome_do_presente}</p> <button ${gift.bought ? "disabled" : ""} onclick="selectGift('${gift.nome_do_presente}')">
+            <p>${gift.name}</p>
+            <button ${gift.bought ? "disabled" : ""} onclick="selectGift('${gift.name}')">
                 ${gift.bought ? "Já Adquirido" : "Presentear"}
             </button>
         `;
@@ -38,21 +39,25 @@ function loadGifts() {
     });
 }
 
+// Selecionar um presente
 function selectGift(item) {
     selectedItem = item;
     document.getElementById("selected-item").innerText = `Você escolheu: ${item}`;
     document.getElementById("modal").style.display = "flex";
 }
 
+// Fechar o modal
 function closeModal() {
     document.getElementById("modal").style.display = "none";
 }
 
+// Validar e-mail
 function validateEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 }
 
+// Enviar o presente
 async function sendGift() {
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
@@ -72,25 +77,29 @@ async function sendGift() {
     }
 
     try {
-        await emailjs.send('service_0m6kpou', 'template_kup4ovf', { // Substitua pelos seus IDs do EmailJS
-            name: name,
-            email: email,
-            item: selectedItem
+        // Envia o presente para o Google Apps Script
+        const response = await fetch(scriptUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: selectedItem }),
         });
 
-        alert("Presente confirmado! Obrigado.");
-        closeModal();
+        const result = await response.json();
 
-        const gift = gifts.find(g => g.nome_do_presente === selectedItem); // Ajustado para usar o nome do presente
-        if (gift) gift.bought = true;
-
-        // Não precisa salvar no localStorage, pois os dados estão na planilha
-        loadGiftsFromSheet(); // Recarrega os presentes da planilha para atualizar a tela
+        if (result.status === 'success') {
+            alert("Presente confirmado! Obrigado.");
+            closeModal();
+            loadGiftsFromSheet(); // Recarrega os presentes da planilha
+        } else {
+            throw new Error("Erro ao confirmar o presente.");
+        }
     } catch (error) {
-        console.error("Erro ao enviar o e-mail:", error);
+        console.error("Erro ao enviar o presente:", error);
         alert("Erro ao confirmar o presente. Tente novamente.");
     }
 }
 
-// Chama a função para carregar os presentes ao iniciar
+// Carregar os presentes ao iniciar
 loadGiftsFromSheet();
