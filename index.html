@@ -1,108 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Presentes de Casamento</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Presentes de Casamento</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Inclusão do EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>Lista de Presentes</h1>
-    <div class="category">
-      <h2>Eletrodomésticos</h2>
-      <ul>
-        <li>Forno elétrico</li>
-        <li>Coifa</li>
-        <li>Liquidificador</li>
-        <li>Batedeira</li>
-        <li>Cafeteira</li>
-        <li>Espremedor de frutas</li>
-        <li>Mixer</li>
-        <li>Sanduicheira</li>
-        <li>Torradeira</li>
-        <li>Processador de alimentos</li>
-        <li>Air fryer</li>
-        <li>Máquina de lavar louça</li>
-        <li>Bebedouro/Purificador de água</li>
-        <li>Ferro de passar</li>
-        <li>Aspirador de pó</li>
-        <li>Máquina de lavar roupa</li>
-        <li>Máquina de secar roupa</li>
-        <li>Climatizador/Ventilador</li>
-      </ul>
+    <header>
+        <h1>Lista de Presentes de Casamento</h1>
+    </header>
+
+    <main>
+        <div id="present-list"></div>
+    </main>
+
+    <footer>
+        <div id="footer-content">
+            <p>&copy; 2025 Todos os direitos reservados.</p>
+            <p><strong>Entre em contato:</strong> meuemail@dominio.com</p>
+        </div>
+        <div id="footer-message">
+            <p>Escolha um presente da nossa lista, preencha seus dados e nos ajude a realizar este momento especial.</p>
+        </div>
+    </footer>
+
+    <!-- Formulário para coleta de informações -->
+    <div id="info-form" style="display:none;">
+        <h3>Detalhes do presente escolhido</h3>
+        <p>Preencha suas informações para que possamos confirmar sua escolha.</p>
+        <form id="giftForm">
+            <input type="text" id="name" placeholder="Seu nome" required>
+            <input type="email" id="email" placeholder="Seu e-mail" required>
+            <button type="submit">Enviar</button>
+        </form>
     </div>
 
-    <div class="category">
-      <h2>Móveis</h2>
-      <ul>
-        <li>Colchão</li>
-        <li>Criado-mudo</li>
-        <li>Cômoda</li>
-        <li>Mesa de jantar</li>
-        <li>Cadeiras</li>
-        <li>Sofá</li>
-        <li>Rack/Estante para TV</li>
-        <li>Mesa de centro</li>
-        <li>Poltronas/Puffs</li>
-        <li>Aparador</li>
-        <li>Escrivaninha</li>
-        <li>Mesa/bancada para cozinha</li>
-        <li>Banquetas</li>
-      </ul>
-    </div>
-
-    <div class="category">
-      <h2>Cama, Mesa e Banho</h2>
-      <ul>
-        <li>Jogos de lençol</li>
-        <li>Travesseiros</li>
-        <li>Fronhas</li>
-        <li>Edredom</li>
-        <li>Cobertor/Manta</li>
-        <li>Protetor de colchão</li>
-        <li>Toalhas de banho</li>
-        <li>Toalhas de rosto</li>
-        <li>Tapete para banheiro</li>
-        <li>Toalhas de mesa</li>
-        <li>Jogos americanos</li>
-        <li>Guardanapos de pano</li>
-      </ul>
-    </div>
-
-    <div class="category">
-      <h2>Utensílios de Cozinha</h2>
-      <ul>
-        <li>Jogo de panelas</li>
-        <li>Panela de pressão</li>
-        <li>Frigideira</li>
-        <li>Assadeiras</li>
-        <li>Jogo de facas</li>
-        <li>Tábuas de corte</li>
-        <li>Utensílios diversos (colheres, espátulas, conchas)</li>
-        <li>Escorredor de louça</li>
-        <li>Jogo de pratos</li>
-        <li>Copos e taças</li>
-        <li>Xícaras e pires</li>
-        <li>Jarra para suco/água</li>
-        <li>Saleiro/Pimenteiro</li>
-        <li>Potes para mantimentos</li>
-        <li>Forminhas de gelo</li>
-      </ul>
-    </div>
-
-    <div class="category">
-      <h2>Decoração e Outros</h2>
-      <ul>
-        <li>Quadros decorativos</li>
-        <li>Espelhos</li>
-        <li>Vasos de plantas/flores</li>
-        <li>Cortinas/Persianas</li>
-        <li>Luminárias</li>
-        <li>Churrasqueira elétrica ou a carvão</li>
-        <li>Itens para área externa</li>
-      </ul>
-    </div>
-  </div>
+    <script src="script.js"></script>
 </body>
 </html>
