@@ -56,15 +56,7 @@ function validateEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 }
-try {
-        await emailjs.send('service_0m6kpou', 'template_kup4ovf', {
-            name: name,
-            email: email,
-            item: selectedItem
-        });
 
-        alert("Presente confirmado! Obrigado.");
-        closeModal();
 // Enviar o presente
 async function sendGift() {
     const name = document.getElementById("name").value;
