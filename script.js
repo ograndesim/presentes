@@ -1,7 +1,7 @@
 let selectedItem = "";
 
-// URL do seu script do Google Apps Script (Substitua pela URL correta após implantar)
-const scriptUrl = 'https://script.google.com/macros/s/AKfycbw_M-Hd3P_Ikg5hz6U5fO-7LIP-P7xVOO4Jd15s55iC9H4Y-qJ6Uu5k2qU2lS1dJ2gY0w/exec'; // **SUBSTITUA PELA URL DO SEU SCRIPT IMPLANTADO**
+// URL do seu script do Google Apps Script (verifique se está correta)
+const scriptUrl = 'https://script.google.com/macros/s/AKfycby59-5-X4-7X7e7j-B3b-LqfL_9n4M076bO8h5jD1jP1sVz9538g9i0D529Y_UfQJ5/exec';
 
 // Função para carregar os presentes
 async function loadGifts() {
