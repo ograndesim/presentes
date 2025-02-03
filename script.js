@@ -1,71 +1,30 @@
 let selectedItem = "";
 
 let gifts = [
-    { "name": "Forno elétrico", "bought": false },
-    { "name": "Coifa", "bought": false },
-    { "name": "Liquidificador", "bought": false },
-    { "name": "Batedeira", "bought": false },
-    { "name": "Cafeteira", "bought": false },
-    { "name": "Espremedor de frutas", "bought": false },
-    { "name": "Mixer", "bought": false },
-    { "name": "Sanduicheira", "bought": false },
-    { "name": "Torradeira", "bought": false },
-    { "name": "Processador de alimentos", "bought": false },
-    { "name": "Air fryer", "bought": false },
-    { "name": "Máquina de lavar louça", "bought": false },
-    { "name": "Bebedouro/Purificador de água", "bought": false },
-    { "name": "Ferro de passar", "bought": false },
-    { "name": "Aspirador de pó", "bought": false },
-    { "name": "Máquina de lavar roupa", "bought": false },
-    { "name": "Máquina de secar roupa", "bought": false },
-    { "name": "Climatizador/Ventilador", "bought": false },
-    { "name": "Colchão", "bought": false },
-    { "name": "Mesa De Cabeceira", "bought": false },
-    { "name": "Cômoda", "bought": false },
-    { "name": "Mesa de jantar", "bought": false },
-    { "name": "Cadeiras", "bought": false },
-    { "name": "Sofá", "bought": false },
-    { "name": "Rack/Estante para TV", "bought": false },
-    { "name": "Mesa de centro", "bought": false },
-    { "name": "Poltronas/Puffs", "bought": false },
-    { "name": "Aparador", "bought": false },
-    { "name": "Escrivaninha", "bought": false },
-    { "name": "Mesa/bancada para cozinha", "bought": false },
-    { "name": "Banquetas", "bought": false },
-    { "name": "Jogos de lençol", "bought": false },
-    { "name": "Travesseiros", "bought": false },
-    { "name": "Fronhas", "bought": false },
-    { "name": "Edredom", "bought": false },
-    { "name": "Cobertor/Manta", "bought": false },
-    { "name": "Protetor de colchão", "bought": false },
-    { "name": "Toalhas de banho", "bought": false },
-    { "name": "Toalhas de rosto", "bought": false },
-    { "name": "Tapete para banheiro", "bought": false },
-    { "name": "Toalhas de mesa", "bought": false },
-    { "name": "Jogos americanos", "bought": false },
-    { "name": "Guardanapos de pano", "bought": false },
-    { "name": "Jogo de panelas", "bought": false },
-    { "name": "Panela de pressão", "bought": false },
-    { "name": "Frigideira", "bought": false },
-    { "name": "Assadeiras", "bought": false },
-    { "name": "Jogo de facas", "bought": false },
-    { "name": "Tábuas de corte", "bought": false },
-    { "name": "Utensílios diversos (colheres, espátulas, conchas)", "bought": false },
-    { "name": "Escorredor de louça", "bought": false },
-    { "name": "Jogo de pratos", "bought": false },
-    { "name": "Copos e taças", "bought": false },
-    { "name": "Xícaras e pires", "bought": false },
-    { "name": "Jarra para suco/água", "bought": false },
-    { "name": "Saleiro/Pimenteiro", "bought": false },
-    { "name": "Potes para mantimentos", "bought": false },
-    { "name": "Forminhas de gelo", "bought": false },
-    { "name": "Quadros decorativos", "bought": false },
-    { "name": "Espelhos", "bought": false },
-    { "name": "Vasos de plantas/flores", "bought": false },
-    { "name": "Cortinas/Persianas", "bought": false },
-    { "name": "Luminárias", "bought": false },
-    { "name": "Churrasqueira elétrica ou a carvão", "bought": false },
-    { "name": "Itens para área externa", "bought": false }
+    async function saveGift(giftName) {
+  const response = await fetch('https://script.google.com/macros/s/AKfycbwxA6IcRtloey7M5UdHSAmfGqFHh7y6UKNQesfLT--3ncKTX5jHknDqRh8-AMrcNfYcLg/exec', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: giftName })
+  });
+
+  const data = await response.json();
+  if (data.status === 'success') {
+    alert("Presente confirmado!");
+    loadGifts();
+  } else {
+    alert("Erro ao confirmar o presente.");
+  }
+}
+
+async function loadGifts() {
+  const response = await fetch('https://script.google.com/macros/s/AKfycbwxA6IcRtloey7M5UdHSAmfGqFHh7y6UKNQesfLT--3ncKTX5jHknDqRh8-AMrcNfYcLg/exec');
+  const gifts = await response.json();
+
+  // Atualize a lista de presentes com os dados recebidos
+  // e marque os itens conforme seu status 'bought'
+}
+
 ];
 
 function saveGifts() {
