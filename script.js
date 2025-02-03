@@ -2,7 +2,7 @@ let selectedItem = "";
 
 let gifts = [
     async function saveGift(giftName) {
-  const response = await fetch('https://script.google.com/macros/s/AKfycbwxA6IcRtloey7M5UdHSAmfGqFHh7y6UKNQesfLT--3ncKTX5jHknDqRh8-AMrcNfYcLg/exec', {
+  const response = await fetch('https://script.google.com/macros/s/1y0cWP_AZg_9p7AomO0gucAdl4GWLYq0GqN08qhdLrUI/exec', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name: giftName })
@@ -18,7 +18,7 @@ let gifts = [
 }
 
 async function loadGifts() {
-  const response = await fetch('https://script.google.com/macros/s/AKfycbwxA6IcRtloey7M5UdHSAmfGqFHh7y6UKNQesfLT--3ncKTX5jHknDqRh8-AMrcNfYcLg/exec');
+  const response = await fetch('https://script.google.com/macros/s/1y0cWP_AZg_9p7AomO0gucAdl4GWLYq0GqN08qhdLrUI/exec');
   const gifts = await response.json();
 
   // Atualize a lista de presentes com os dados recebidos
