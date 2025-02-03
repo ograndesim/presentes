@@ -8,6 +8,9 @@ const scriptUrl = 'https://script.google.com/macros/s/AKfycbxs-B1NF6GNuR94VkJvps
 async function loadGiftsFromSheet() {
     try {
         const response = await fetch(scriptUrl);
+        if (!response.ok) {
+            throw new Error(`Erro na resposta: ${response.statusText}`);
+        }
         const data = await response.json();
 
         if (data && Array.isArray(data)) {
@@ -31,7 +34,7 @@ function loadGifts() {
         giftItem.classList.add("gift-item");
         giftItem.innerHTML = `
             <p>${gift.name}</p>
-            <button ${gift.bought ? "true" : ""} onclick="selectGift('${gift.name}')">
+            <button ${gift.bought ? "disabled" : ""} onclick="selectGift('${gift.name}')">
                 ${gift.bought ? "Já Adquirido" : "Presentear"}
             </button>
         `;
