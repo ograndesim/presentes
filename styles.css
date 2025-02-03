@@ -1,67 +1,77 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+    font-family: Arial, sans-serif;
+    background-image: url('background.jpg'); /* Coloque o caminho da imagem de fundo aqui */
+    background-size: cover;
+    margin: 0;
+    padding: 0;
 }
 
-.container {
-  width: 90%;
-  margin: 0 auto;
-  max-width: 1200px;
+header {
+    background-color: rgba(0, 0, 0, 0.5); /* Transparente para ver a imagem de fundo */
+    color: white;
+    text-align: center;
+    padding: 20px;
 }
 
-h1 {
-  text-align: center;
-  margin: 20px 0;
-  font-size: 2.5rem;
-  color: #007BFF;
+main {
+    padding: 20px;
 }
 
-.category {
-  margin-bottom: 30px;
+footer {
+    background-color: rgba(0, 0, 0, 0.5); /* Transparente para ver a imagem de fundo */
+    color: white;
+    padding: 20px;
+    text-align: center;
 }
 
-h2 {
-  background-color: #007BFF;
-  color: white;
-  padding: 10px;
-  font-size: 1.5rem;
-  border-radius: 5px;
+footer p {
+    margin: 5px 0;
 }
 
-ul {
-  list-style-type: none;
-  padding: 10px 0;
+#info-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-ul li {
-  background-color: #fff;
-  margin: 5px 0;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+#info-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
 }
 
-ul li:hover {
-  background-color: #f1f1f1;
+#info-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-  h1 {
-    font-size: 2rem;
-  }
+#info-form button:hover {
+    background-color: #45a049;
+}
 
-  .category h2 {
-    font-size: 1.25rem;
-  }
+.category h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
 
-  ul li {
-    font-size: 0.9rem;
-  }
+.present {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.present span {
+    font-size: 18px;
 }
