@@ -4,7 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Presentes - Jéssica & Caio</title>
- </head>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init('oJ4KCIZkv1dOQ-xO8'); // Sua API Key
+  </script>
+</head>
 <body>
   <div class="container">
     <header>
@@ -22,6 +27,7 @@
     </footer>
   </div>
 
+  <!-- Modal -->
   <div id="modal" class="modal">
     <div class="modal-content">
       <h2>Confirmar Presente</h2>
@@ -35,6 +41,7 @@
         <input type="email" id="email" placeholder="Seu E-mail" required>
         <span id="email-error" class="error-message"></span>
       </div>
+      <!-- Mensagens de sucesso e erro -->
       <p id="success-message" class="success-message"></p>
       <p id="error-message" class="error-message"></p>
       <div class="modal-buttons">
@@ -44,95 +51,6 @@
     </div>
   </div>
 
-  <script>
-    const scriptUrl = "URL_DO_SEU_SCRIPT_APPS_SCRIPT"; // Substitua pelo URL do seu script
-    let gifts = [];
-    let selectedItem = "";
-
-    async function loadGiftsFromSheet() {
-      try {
-        const response = await fetch(scriptUrl + "?action=getGiftList");
-        const data = await response.json();
-
-        if (data && Array.isArray(data)) {
-          gifts = data;
-          loadGifts();
-        } else {
-          console.error("Dados não encontrados ou formato inválido.");
-        }
-      } catch (error) {
-        console.error("Erro ao carregar os dados da planilha:", error);
-      }
-    }
-
-    function loadGifts() {
-      const giftList = document.getElementById("gift-list");
-      giftList.innerHTML = "";
-
-      gifts.forEach(gift => {
-        const giftItem = document.createElement("div");
-        giftItem.classList.add("gift-item");
-        giftItem.innerHTML = `
-          <p>${gift.name}</p>
-          <button ${gift.bought ? "disabled" : ""} onclick="openModal('${gift.name}')">
-            ${gift.bought ? "Já Adquirido" : "Presentear"}
-          </button>
-        `;
-        giftList.appendChild(giftItem);
-      });
-    }
-
-    function openModal(giftName) {
-      selectedItem = giftName;
-      document.getElementById("selected-item").textContent = `Deseja presentear ${giftName}?`;
-      document.getElementById("modal").style.display = "block";
-    }
-
-    function closeModal() {
-      document.getElementById("modal").style.display = "none";
-      document.getElementById("success-message").textContent = ""; // Limpa mensagens
-      document.getElementById("error-message").textContent = "";
-    }
-
-    async function sendGift() {
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const emailError = document.getElementById("email-error");
-      const successMessage = document.getElementById("success-message");
-      const errorMessage = document.getElementById("error-message");
-
-      // Validação de email (exemplo básico)
-      if (!isValidEmail(email)) {
-        emailError.textContent = "Email inválido.";
-        return;
-      }
-      emailError.textContent = ""; // Limpa mensagem de erro
-
-      try {
-        const response = await fetch(scriptUrl + "?action=markAsBought&name=" + selectedItem + "&nameUser=" + name + "&emailUser=" + email);
-        if (response.ok) {
-          successMessage.textContent = "Obrigado por presentear! Seu nome e email foram registrados.";
-          errorMessage.textContent = "";
-          loadGiftsFromSheet(); // Atualiza a lista
-          closeModal();
-        } else {
-          errorMessage.textContent = "Ocorreu um erro ao registrar o presente.";
-          successMessage.textContent = "";
-        }
-      } catch (error) {
-        console.error("Erro ao enviar presente:", error);
-        errorMessage.textContent = "Ocorreu um erro ao enviar o presente.";
-        successMessage.textContent = "";
-      }
-    }
-
-    function isValidEmail(email) {
-      // Expressão regular simples para validar email. Você pode usar uma mais robusta.
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-
-    loadGiftsFromSheet(); // Carrega a lista de presentes ao carregar a página.
-  </script>
+  <script src="./script.js"></script>
 </body>
 </html>
