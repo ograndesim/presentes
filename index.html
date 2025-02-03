@@ -7,19 +7,18 @@
   <link rel="stylesheet" href="./styles.css">
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
-    emailjs.init('oJ4KCIZkv1dOQ-xO8'); // Sua API Key
+    emailjs.init('oJ4KCIZkv1dOQ-xO8'); // Sua API Key do EmailJS (substitua pelo seu)
   </script>
 </head>
 <body>
   <div class="container">
     <header>
       <h1>Lista de Presentes</h1>
-      <h2>Ajude-nos a não começar a vida a dois com uma única panela e muita esperança! </h2>
+      <h2>Ajude-nos a não começar a vida a dois com uma única panela e muita esperança!</h2>
     </header>
 
     <section class="gift-section">
-      <h3></h3>
-      <div id="gift-list" class="gift-list"></div>
+      <h3></h3> <div id="gift-list" class="gift-list"></div>
     </section>
 
     <footer>
@@ -27,7 +26,6 @@
     </footer>
   </div>
 
-  <!-- Modal -->
   <div id="modal" class="modal">
     <div class="modal-content">
       <h2>Confirmar Presente</h2>
@@ -41,16 +39,14 @@
         <input type="email" id="email" placeholder="Seu E-mail" required>
         <span id="email-error" class="error-message"></span>
       </div>
-      <!-- Mensagens de sucesso e erro -->
       <p id="success-message" class="success-message"></p>
       <p id="error-message" class="error-message"></p>
       <div class="modal-buttons">
-        <button onclick="sendGift()">Confirmar</button>
+        <button onclick="confirmGift()">Confirmar</button>
         <button onclick="closeModal()">Cancelar</button>
       </div>
     </div>
   </div>
 
-  <script src="./script.js"></script>
-</body>
+  <script src="./script.js"></script> </body>
 </html>
