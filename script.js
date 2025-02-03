@@ -83,12 +83,13 @@ async function sendGift() {
     }
 
     try {
+        // Envia o presente para o Google Apps Script
         const response = await fetch(scriptUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name: selectedItem, email, person: name }),
+            body: JSON.stringify({ name: selectedItem }),
         });
 
         const result = await response.json();
@@ -96,11 +97,6 @@ async function sendGift() {
         if (result.status === 'success') {
             successMessage.textContent = "Presente confirmado! Obrigado.";
             successMessage.style.display = "block";
-
-            // Atualiza o status do presente localmente
-            const gift = gifts.find(g => g.name === selectedItem);
-            if (gift) gift.bought = true;
-
             setTimeout(() => {
                 closeModal();
                 loadGiftsFromSheet(); // Recarrega os presentes da planilha
@@ -115,5 +111,5 @@ async function sendGift() {
     }
 }
 
-// Carrega os presentes ao iniciar
+// Carregar os presentes ao iniciar
 loadGiftsFromSheet();
