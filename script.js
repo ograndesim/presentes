@@ -1,9 +1,9 @@
 let selectedItem = "";
 
-// URL do seu script do Google Apps Script (Substitua pela sua URL)
-const scriptUrl = 'https://script.google.com/macros/s/AKfycbxs-B1NF6GNuR94VkJvpsjcA3484QzRAWxC6xW89zHsiXbagRyjsICnUn6rkW5tlAcV/exec'; // **Substitua pela sua URL**
+// URL do seu script do Google Apps Script (Confirme se está correta)
+const scriptUrl = 'https://script.google.com/macros/s/AKfycbxs-B1NF6GNuR94VkJvpsjcA3484QzRAWxC6xW89zHsiXbagRyjsICnUn6rkW5tlAcV/exec';
 
-// Função para carregar os presentes
+// Função para carregar os presentes (mantida como antes)
 async function loadGifts() {
     try {
         const response = await fetch(scriptUrl);
@@ -19,7 +19,7 @@ async function loadGifts() {
     }
 }
 
-// Exibir os presentes na página
+// Exibir os presentes na página (mantida como antes)
 function displayGifts(gifts) {
     const giftList = document.getElementById("gift-list");
     giftList.innerHTML = "";
@@ -37,14 +37,14 @@ function displayGifts(gifts) {
     });
 }
 
-// Selecionar um presente
+// Selecionar um presente (mantida como antes)
 function selectGift(item) {
     selectedItem = item;
     document.getElementById("selected-item").innerText = `Você escolheu: ${item}`;
     document.getElementById("modal").style.display = "flex";
 }
 
-// Fechar o modal
+// Fechar o modal (mantida como antes)
 function closeModal() {
     document.getElementById("modal").style.display = "none";
     // Limpa os campos do modal quando ele é fechado
@@ -55,14 +55,14 @@ function closeModal() {
     document.getElementById("error-message").style.display = "none";
 }
 
-// Validar e-mail (melhorável, mas funcional)
+// Validar e-mail (mantida como antes)
 function validateEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 }
 
-// Enviar o presente (função renomeada para confirmGift)
-async function confirmGift() { 
+// Enviar o presente (função confirmGift - Modificada para Depuração)
+async function confirmGift() {
     console.log("Função confirmGift() chamada!");
 
     const name = document.getElementById("name").value;
@@ -80,7 +80,7 @@ async function confirmGift() {
     if (!name || !email) {
         errorMessage.textContent = "Preencha todos os campos!";
         errorMessage.style.display = "block";
-        return; 
+        return;
     }
 
     if (!validateEmail(email)) {
@@ -88,6 +88,8 @@ async function confirmGift() {
         emailError.style.display = "block";
         return;
     }
+
+    console.log("Dados a serem enviados:", { name: selectedItem, nome: name, email: email }); // **Log para Depuração**
 
     try {
         // Envia o presente para o Google Apps Script
@@ -99,11 +101,11 @@ async function confirmGift() {
             body: JSON.stringify({ name: selectedItem, nome: name, email: email }),
         });
 
-        console.log("Resposta do servidor:", response);
+        console.log("Resposta completa do servidor:", response); // **Log para Depuração (Resposta Completa)**
 
         const result = await response.json();
 
-        console.log("Resultado:", result);
+        console.log("Resultado da requisição:", result); // **Log para Depuração**
 
         if (result.status === 'success') {
             successMessage.textContent = "Presente confirmado! Obrigado.";
@@ -115,11 +117,13 @@ async function confirmGift() {
                 closeModal();
             }, 2000);
         } else {
-            throw new Error("Erro ao confirmar o presente.");
+            console.error("Erro ao confirmar o presente:", result.message); // **Log para Depuração (Erro do Servidor)**
+            errorMessage.textContent = `Erro ao confirmar o presente: ${result.message}`;
+            errorMessage.style.display = "block";
         }
     } catch (error) {
-        console.error("Erro ao enviar o presente:", error);
-        errorMessage.textContent = "Erro ao confirmar o presente. Tente novamente.";
+        console.error("Erro ao enviar o presente:", error); // **Log para Depuração (Erro de Rede)**
+        errorMessage.textContent = "Erro ao confirmar o presente. Verifique o console para mais detalhes.";
         errorMessage.style.display = "block";
     }
 }
