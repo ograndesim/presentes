@@ -1,7 +1,7 @@
 let selectedItem = "";
 
 // URL do seu script do Google Apps Script (Substitua pelo seu URL)
-const scriptUrl = 'https://script.google.com/macros/s/AKfycbxs-B1NF6GNuR94VkJvpsjcA3484QzRAWxC6xW89zHsiXbagRyjsICnUn6rkW5tlAcV/exec';
+const scriptUrl = 'https://script.google.com/macros/s/AKfycbxs-B1NF6GNuR94VkJvpsjcA3484QzRAWxC6xW89zHsiXbagRyjsICnUn6rkW5tlAcV/exec'; // **IMPORTANTE:** Substitua pela sua URL
 
 // Função para carregar os presentes
 async function loadGifts() {
@@ -56,7 +56,7 @@ function validateEmail(email) {
 }
 
 // Enviar o presente
-async function sendGift() {
+async function confirmGift() {
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const emailError = document.getElementById("email-error");
@@ -87,7 +87,7 @@ async function sendGift() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name: selectedItem, nome: name, email: email }), // **CORREÇÃO:** Enviando os dados corretos (nome do presente, nome do convidado, e-mail)
+            body: JSON.stringify({ name: selectedItem, nome: name, email: email }),
         });
 
         const result = await response.json();
@@ -95,12 +95,12 @@ async function sendGift() {
         if (result.status === 'success') {
             successMessage.textContent = "Presente confirmado! Obrigado.";
             successMessage.style.display = "block";
-            
-            loadGifts(); // **CORREÇÃO:** Recarrega os presentes da planilha **após** a confirmação
+
+            loadGifts();
 
             setTimeout(() => {
                 closeModal();
-            }, 2000); // Fecha o modal após 2 segundos
+            }, 2000);
         } else {
             throw new Error("Erro ao confirmar o presente.");
         }
