@@ -31,7 +31,7 @@ function loadGifts() {
         giftItem.classList.add("gift-item");
         giftItem.innerHTML = `
             <p>${gift.name}</p>
-            <button ${gift.bought ? "disabled" : ""} onclick="selectGift('${gift.name}')">
+            <button ${gift.bought ? "true" : ""} onclick="selectGift('${gift.name}')">
                 ${gift.bought ? "Já Adquirido" : "Presentear"}
             </button>
         `;
