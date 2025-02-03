@@ -2,7 +2,7 @@ let selectedItem = "";
 let gifts = [];
 
 // URL do seu script do Google Apps
-const scriptUrl = 'https://script.google.com/macros/s/AKfycbyB1llKwvWLNpf9JQKZsUW4kFSF5_LtSaXxj3jNxsjN12f4D8s-AOI010LMDPZ3WgWlBQ/exec';
+const scriptUrl = 'https://script.google.com/macros/s/AKfycbw8nMqJVoED2xB6ES1xujrint_LtnPHna7TLPA-wydF6KjsnPv-Edugy8QAL4vHOJOpDQ/exec'; // Seu código de implantação
 
 // Função para carregar os dados da planilha via Google Apps Script
 async function loadGiftsFromSheet() {
@@ -11,8 +11,8 @@ async function loadGiftsFromSheet() {
         const data = await response.json();
 
         if (data && data.gifts) {
-            gifts = data.gifts; // Supondo que o seu script retorne os dados no formato esperado
-            loadGifts(); // Carregar os presentes após carregar da planilha
+            gifts = data.gifts;
+            loadGifts();
         } else {
             console.error("Dados não encontrados na resposta.");
         }
@@ -30,8 +30,7 @@ function loadGifts() {
         const giftItem = document.createElement("div");
         giftItem.classList.add("gift-item");
         giftItem.innerHTML = `
-            <p>${gift.name}</p>
-            <button ${gift.bought ? "disabled" : ""} onclick="selectGift('${gift.name}')">
+            <p>${gift.nome_do_presente}</p> <button ${gift.bought ? "disabled" : ""} onclick="selectGift('${gift.nome_do_presente}')">
                 ${gift.bought ? "Já Adquirido" : "Presentear"}
             </button>
         `;
@@ -66,14 +65,14 @@ async function sendGift() {
 
     if (!validateEmail(email)) {
         emailError.textContent = "Por favor, insira um e-mail válido. Exemplo: usuario@example.com";
-        emailError.style.display = "block"; // Mostra a mensagem de erro
+        emailError.style.display = "block";
         return;
     } else {
-        emailError.style.display = "none"; // Oculta a mensagem de erro se o e-mail for válido
+        emailError.style.display = "none";
     }
 
     try {
-        await emailjs.send('service_0m6kpou', 'template_kup4ovf', {
+        await emailjs.send('service_0m6kpou', 'template_kup4ovf', { // Substitua pelos seus IDs do EmailJS
             name: name,
             email: email,
             item: selectedItem
@@ -82,11 +81,11 @@ async function sendGift() {
         alert("Presente confirmado! Obrigado.");
         closeModal();
 
-        const gift = gifts.find(g => g.name === selectedItem);
+        const gift = gifts.find(g => g.nome_do_presente === selectedItem); // Ajustado para usar o nome do presente
         if (gift) gift.bought = true;
 
-        saveGifts(); // Salva o estado atualizado no localStorage
-        loadGifts(); // Recarrega a lista de presentes
+        // Não precisa salvar no localStorage, pois os dados estão na planilha
+        loadGiftsFromSheet(); // Recarrega os presentes da planilha para atualizar a tela
     } catch (error) {
         console.error("Erro ao enviar o e-mail:", error);
         alert("Erro ao confirmar o presente. Tente novamente.");
